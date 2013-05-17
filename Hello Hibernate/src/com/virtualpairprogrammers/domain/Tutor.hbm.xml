@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	
+<class name="com.virtualpairprogrammers.domain.Tutor">
+	<id name="id" access="field">
+		<generator class="native"/>
+	</id>
+	
+	<property name="staffId" unique="true" access="field"/>
+	<property name="name" access="field"/>
+	<property name="salary"  access="field"/>
+	
+	<set name="supervisionGroup" access="field" inverse="true">
+		<key column="TUTOR_FK"/>
+		<one-to-many class="com.virtualpairprogrammers.domain.Student"/>
+	</set>
+	
+	<set name="subjectGroup" access="field" inverse="true" table="SUBJECT_TUTOR">
+		<key column="TUTORGROUP_ID"/>
+		<many-to-many column="SUBJECT_ID" class="com.virtualpairprogrammers.domain.Subject"/>
+	</set>
+</class>
+
+</hibernate-mapping>
